@@ -164,7 +164,7 @@ export function BookingForm({
                 ))}
               </select>
             </Field>
-            <Field label="Time (UK)" htmlFor="timePicker" error={errors.requestedTime ?? errors.requestedTime}>
+            <Field label="Time (UK)" htmlFor="timePicker" error={errors.requestedTime}>
               <select
                 id="timePicker"
                 className="field-input"
@@ -180,7 +180,9 @@ export function BookingForm({
             </Field>
           </div>
         )}
-        {!day.includes('-') ? null : null}
+        <p className="text-xs text-slate-500">
+          Slots are shown in UK time and limited by tester capacity — a slot disappears once it is full.
+        </p>
       </fieldset>
 
       <fieldset className="space-y-5">
