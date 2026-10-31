@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+.env
+.env.local
+.env*.local
+*.log
+data/
+.data/
+playtest.db
+playtest.db-*
+test-results/
+.playwright/
+.DS_Store
+next-env.d.ts
