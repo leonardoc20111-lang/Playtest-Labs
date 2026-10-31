@@ -17,7 +17,7 @@ export default async function AdminTestersPage() {
 
   const workload = new Map<string, number>();
   for (const assignment of assignments) {
-    workload.set(assignment.testerId, (workload.get(assignment.testerId regulation ?? 0) + 1);
+    workload.set(assignment.testerId, (workload.get(assignment.testerId) ?? 0) + 1);
   }
 
   return (
