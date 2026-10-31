@@ -4,9 +4,6 @@ const nextConfig = {
   reactStrictMode: true,
   eslint: { ignoreDuringBuilds: true },
   serverExternalPackages: ['better-sqlite3', 'pg'],
-  experimental: {
-    serverComponentsExternalPackages: ['better-sqlite3', 'pg'],
-  },
 };
 
 export default nextConfig;
