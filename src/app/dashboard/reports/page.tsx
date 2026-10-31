@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Badge, Card, EmptyState } from '@/components/ui';
 import { requireUser } from '@/lib/auth';
 import { listReports } from '@/lib/data/repos';
-import { formatDate, formatGBP } from '@/lib/format';
+import { formatDate } from '@/lib/format';
 
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = { title: 'Reports' };
@@ -70,9 +70,8 @@ export default async function CustomerReportsPage() {
       <Card>
         <h2 className="text-sm font-semibold text-white">What is in a report?</h2>
         <p className="mt-2 text-sm leading-relaxed text-slate-400">
-          Every report covers overall impression, gameplay experience, mechanics, bugs discovered, performance,
-          user experience, suggested improvements and an overall rating out of ten — with your booking total of{' '}
-          {formatGBP(0).replace('£0.00', 'transparent pricing')} and no hidden fees.
+          Every report covers your overall impression score, gameplay experience, mechanics, bugs discovered,
+          performance, user experience and suggested improvements, plus an overall rating out of ten.
         </p>
       </Card>
     </div>
