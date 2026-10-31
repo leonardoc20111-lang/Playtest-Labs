@@ -58,7 +58,7 @@ export function BookingForm({
       <input type="hidden" name="requestedDate" value={date} />
       <input type="hidden" name="requestedTime" value={time} />
 
-      {state.error ? <Alert tone="danger">{state.error}</Alert> : null}
+      {state.error ? <Alert tone="error">{state.error}</Alert> : null}
 
       <fieldset className="space-y-5">
         <legend className="section-eyebrow">1. Choose your package</legend>
@@ -208,7 +208,7 @@ export function BookingForm({
             />
           </Field>
           <Field label="Phone / Discord" htmlFor="contactPhone" error={errors.contactPhone} hint="Optional, used for scheduling questions.">
-            <input irthid="contactPhone" id="contactPhone" name="contactPhone" className="field-input" />
+            <input id="contactPhone" name="contactPhone" className="field-input" />
           </Field>
         </div>
       </fieldset>
