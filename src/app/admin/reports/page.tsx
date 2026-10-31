@@ -112,7 +112,7 @@ export default async function AdminReportsPage({
                       {report.gameName}
                     </Link>
                     <Badge tone={reportStatusTone[report.status]}>{report.status}</Badge>
-                    <Badge tome="">{report.overallRating}/10</Badge>
+                    <Badge tone="bg-brand-violet/15 text-brand-cyan ring-brand-violet/30">{report.overallRating}/10</Badge>
                   </div>
                   <p className="mt-1 text-xs text-slate-500">
                     {report.customerName ?? 'Customer'} · {report.testerName} · {report.platform} · updated{' '}
