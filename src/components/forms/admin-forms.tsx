@@ -5,16 +5,18 @@ import {
   createSlotAction,
   createTesterAction,
   editBookingAction,
+  rejectBookingAction,
   saveBookingNotesAction,
   saveReportAction,
+  setBookingStatusAction,
   updatePaymentAction,
   updateServiceAction,
 } from '@/app/actions/admin';
 import { emptyFormState } from '@/lib/form-state';
 import { Button, Field, SubmitButton } from '@/components/controls';
 import { Alert } from '@/components/ui';
-import { PAYMENT_STATUSES, PLATFORMS } from '@/lib/config';
-import { paymentStatusLabel } from '@/lib/format';
+import { BOOKING_STATUSES, PAYMENT_STATUSES, PLATFORMS } from '@/lib/config';
+import { bookingStatusLabel, paymentStatusLabel } from '@/lib/format';
 import type { Booking, FeedbackReport, Payment, Service } from '@/lib/types';
 
 export function EditBookingForm({ booking }: { booking: Booking }) {
