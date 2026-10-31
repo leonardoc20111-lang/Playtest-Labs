@@ -82,17 +82,12 @@ export async function acceptBookingAction(formData: FormData): Promise<void> {
 
   await updateBooking(bookingId, { status: 'accepted' });
   const payment = await getPaymentByBookingId(bookingId);
-  if (!paymentLink && !payment && booking.pricePence === 0) {
-    // Free/complimentary bookings need no payment request.
-  }
-  const effectiveLink = paymentLink || (booking.status === 'accepted' ? null : null);
   if (payment) {
     await updatePayment(bookingId, {
       status: payment.status === 'paid' ? 'paid' : 'payment_requested',
       paymentLink: paymentLink || payment.paymentLink || null,
     });
   }
-  void effectiveLink;
 
   await notify(
     booking.customerId,
@@ -415,7 +410,6 @@ export async function publishReportAction(formData: FormData): Promise<void> {
     revalidatePath(`/admin/bookings/${booking.reference}`);
   }
   revalidatePath('/admin/reports');
-  revalidatePath('//dashboard/reports');
   revalidatePath('/dashboard/reports');
   revalidatePath(`/dashboard/reports/${reportId}`);
 }
