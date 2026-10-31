@@ -185,13 +185,9 @@ export function PaymentForm({ bookingId, payment }: { bookingId: string; payment
 }
 
 export function BookingStatusForm({ bookingId, status }: { bookingId: string; status: Booking['status'] }) {
-  const [state, formAction, pending] = useActionState(setBookingStatusAction, emptyFormState);
-
   return (
-    <form action={formAction} className="space-y-3">
+    <form action={setBookingStatusAction} className="space-y-3">
       <input type="hidden" name="bookingId" value={bookingId} />
-      {state.error ? <Alert tone="error">{state.error}</Alert> : null}
-      {state.success ? <Alert tone="success">{state.success}</Alert> : null}
       <div className="grid gap-3 sm:grid-cols-[1fr_2fr]">
         <Field label="Booking status" htmlFor={`booking-status-${bookingId}`}>
           <select id={`booking-status-${bookingId}`} name="status" className="field-input" defaultValue={status}>
