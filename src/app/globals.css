@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-950 text-slate-300 antialiased;
+    background-image:
+      radial-gradient(60% 55% at 15% -5%, rgba(79, 124, 255, 0.16) 0%, transparent 60%),
+      radial-gradient(45% 45% at 90% 0%, rgba(139, 92, 246, 0.16) 0%, transparent 60%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-white;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: rgba(106, 91, 255, 0.35);
+    color: #fff;
+  }
+
+  *:focus-visible {
+    outline: 2px solid rgba(106, 91, 255, 0.75);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+
+  .surface {
+    @apply rounded-2xl border border-white/[0.07] bg-white/[0.025] shadow-card backdrop-blur-sm;
+  }
+
+  .surface-hover {
+    @apply transition duration-300 hover:border-white/[0.14] hover:bg-white/[0.045];
+  }
+
+  .display-xl {
+    @apply font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl;
+  }
+
+  .display-lg {
+    @apply font-display text-3xl font-semibold leading-tight text-white sm:text-4xl;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-300;
+  }
+
+  .gradient-text {
+    @apply bg-brand-gradient bg-clip-text text-transparent;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-[0.12em] text-slate-400;
+  }
+
+  .field-input {
+    @apply w-full rounded-xl border border-white/10 bg-ink-900/80 px-3.5 py-2.5 text-sm text-white placeholder:text-slate-500 transition focus:border-brand-indigo/60 focus:bg-ink-900 focus:outline-none focus:ring-2 focus:ring-brand-indigo/25 disabled:opacity-60;
+  }
+
+  .field-error {
+    @apply mt-1.5 text-xs font-medium text-rose-300;
+  }
+
+  .table-wrap {
+    @apply -mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0;
+  }
+
+  .table-base {
+    @apply w-full min-w-[42rem] border-collapse text-left text-sm;
+  }
+
+  .table-base thead th {
+    @apply border-b border-white/10 pb-3 pr-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500;
+  }
+
+  .table-base tbody td {
+    @apply border-b border-white/[0.05] py-3.5 pr-4 align-middle text-slate-300;
+  }
+
+  .table-base tbody tr:last-child td {
+    @apply border-b-0;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
