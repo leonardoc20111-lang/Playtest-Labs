@@ -202,7 +202,7 @@ export function BookingStatusForm({ bookingId, status }: { bookingId: string; st
           <input id={`booking-note-${bookingId}`} name="note" className="field-input" placeholder="Starting testing at 18:00 GMT" />
         </Field>
       </div>
-      <SubmitButton pending={pending} variant="secondary" size="sm">
+      <SubmitButton variant="secondary" size="sm">
         Update status
       </SubmitButton>
     </form>
@@ -210,13 +210,10 @@ export function BookingStatusForm({ bookingId, status }: { bookingId: string; st
 }
 
 export function RejectBookingForm({ bookingId }: { bookingId: string }) {
-  const [state, formAction, pending] = useActionState(rejectBookingAction, emptyFormState);
-
   return (
-    <form action={formAction} className="space-y-3">
+    <form action={rejectBookingAction} className="space-y-3">
       <input type="hidden" name="bookingId" value={bookingId} />
-      {state.error ? <Alert tone="error">{state.error}</Alert> : null}
-      <Field label="Rejection reason" htmlFor={`reject-${bookingId}`} error={state.fieldErrors?.reason}>
+      <Field label="Rejection reason" htmlFor={`reject-${bookingId}`}>
         <textarea
           id={`reject-${bookingId}`}
           name="reason"
@@ -225,7 +222,7 @@ export function RejectBookingForm({ bookingId }: { bookingId: string }) {
           placeholder="No tester availability for that platform."
         />
       </Field>
-      <SubmitButton pending={pending} variant="danger" size="sm">
+      <SubmitButton variant="danger" size="sm">
         Reject request
       </SubmitButton>
     </form>
