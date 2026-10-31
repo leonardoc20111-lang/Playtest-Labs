@@ -195,8 +195,8 @@ async function main() {
       await customer.goto(`${BASE}/dashboard/settings`, { waitUntil: 'domcontentloaded' });
       const nameField = customer.locator('input[name="fullName"]').first();
       await nameField.fill('E2E Tester Renamed');
-      await customer.getByRole('button', { name: /Save/i }).first().click();
-      await waitForText(customer, 'saved', 20_000);
+      await customer.getByRole('button', { name: /Save profile/i }).first().click();
+      await waitForText(customer, 'Profile updated', 20_000);
       await customer.goto(`${BASE}/dashboard/settings`, { waitUntil: 'domcontentloaded' });
       assert(
         (await customer.locator('input[name="fullName"]').first().inputValue()) === 'E2E Tester Renamed',
