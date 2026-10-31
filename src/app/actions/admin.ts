@@ -19,11 +19,9 @@ import {
   createTesterAccount,
   deleteSlot,
   getBookingById,
-  getBookingByReference,
   getPaymentByBookingId,
-} from '@/lib/data/repos';
-import { getProfileById } from '@/lib/data/repos';
-import {
+  getProfileByEmail,
+  getProfileById,
   moderateReview,
   saveReport,
   setContactMessageStatus,
@@ -537,7 +535,6 @@ export async function createTesterAction(_prev: FormState, formData: FormData): 
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return { fieldErrors: { email: 'Enter a valid email' } };
   if (password.length < 8) return { fieldErrors: { password: 'Use at least 8 characters' } };
 
-  const { getProfileByEmail } = await import('@/lib/data/repos');
   const existing = await getProfileByEmail(email);
   if (existing) return { fieldErrors: { email: 'An account with this email already exists' } };
 
@@ -570,14 +567,4 @@ export async function setMessageStatusAction(formData: FormData): Promise<void> 
   await setContactMessageStatus(id, status);
   revalidatePath('/admin/messages');
   revalidatePath('/admin');
-}
-
-/** Used by client-side helper links (e.g. "open booking" from the reports list). */
-export async function resolveBookingReferenceAction(formData: FormData): Promise<string | null> {
-  const staff = await admin();
-  if (!staff) return null;
-  const reference = String(formData.get('reference') ?? '').trim().toUpperCase();
-  if (!reference) return null;
-  const booking = await getBookingByReference(reference);
-  return booking?.id ?? null;
 }
