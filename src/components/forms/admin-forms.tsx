@@ -182,6 +182,58 @@ export function PaymentForm({ bookingId, payment }: { bookingId: string; payment
   );
 }
 
+export function BookingStatusForm({ bookingId, status }: { bookingId: string; status: Booking['status'] }) {
+  const [state, formAction, pending] = useActionState(setBookingStatusAction, emptyFormState);
+
+  return (
+    <form action={formAction} className="space-y-3">
+      <input type="hidden" name="bookingId" value={bookingId} />
+      {state.error ? <Alert tone="error">{state.error}</Alert> : null}
+      {state.success ? <Alert tone="success">{state.success}</Alert> : null}
+      <div className="grid gap-3 sm:grid-cols-[1fr_2fr]">
+        <Field label="Booking status" htmlFor={`booking-status-${bookingId}`}>
+          <select id={`booking-status-${bookingId}`} name="status" className="field-input" defaultValue={status}>
+            {BOOKING_STATUSES.map((option) => (
+              <option key={option} value={option}>
+                {bookingStatusLabel[option]}
+              </option>
+            ))}
+          </select>
+        </Field>
+        <Field label="Status note (optional)" htmlFor={`booking-note-${bookingId}`} hint="Included in the customer notification.">
+          <input id={`booking-note-${bookingId}`} name="note" className="field-input" placeholder="Starting testing at 18:00 GMT" />
+        </Field>
+      </div>
+      <SubmitButton pending={pending} variant="secondary" size="sm">
+        Update status
+      </SubmitButton>
+    </form>
+  );
+}
+
+export function RejectBookingForm({ bookingId }: { bookingId: string }) {
+  const [state, formAction, pending] = useActionState(rejectBookingAction, emptyFormState);
+
+  return (
+    <form action={formAction} className="space-y-3">
+      <input type="hidden" name="bookingId" value={bookingId} />
+      {state.error ? <Alert tone="error">{state.error}</Alert> : null}
+      <Field label="Rejection reason" htmlFor={`reject-${bookingId}`} error={state.fieldErrors?.reason}>
+        <textarea
+          id={`reject-${bookingId}`}
+          name="reason"
+          rows={2}
+          className="field-input"
+          placeholder="No tester availability for that platform."
+        />
+      </Field>
+      <SubmitButton pending={pending} variant="danger" size="sm">
+        Reject request
+      </SubmitButton>
+    </form>
+  );
+}
+
 const REPORT_SECTIONS: Array<{ name: keyof FeedbackReport; label: string; hint: string; rows: number }> = [
   { name: 'overallImpression', label: '1. Overall impression', hint: 'Headline verdict on the game.', rows: 3 },
   { name: 'gameplayExperience', label: '2. Gameplay experience', hint: 'Core loop, pacing, replayability.', rows: 4 },
